@@ -1,0 +1,228 @@
+{
+  "config": {
+    "seed": 42,
+    "version": "stage1-v0.1",
+    "sim_start": "2018-01-01",
+    "sim_end": "2026-10-31",
+    "n_flats": 500,
+    "floors": 10,
+    "units_per_floor": 10,
+    "owner_ratio": 0.78,
+    "owner_types": [
+      [
+        "resident",
+        "absentee",
+        "company"
+      ],
+      [
+        0.35,
+        0.5,
+        0.15
+      ]
+    ],
+    "rentable_prob": {
+      "resident": 0.25,
+      "absentee": 0.92,
+      "company": 1.0
+    },
+    "owner_hike_mean": [
+      0.06,
+      0.025
+    ],
+    "bhk": [
+      [
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0.15,
+        0.4,
+        0.35,
+        0.1
+      ]
+    ],
+    "area_by_bhk": {
+      "1": 650,
+      "2": 1050,
+      "3": 1450,
+      "4": 2000
+    },
+    "furnishing": [
+      [
+        "unfurnished",
+        "semi",
+        "furnished"
+      ],
+      [
+        0.4,
+        0.4,
+        0.2
+      ]
+    ],
+    "furnishing_premium": {
+      "unfurnished": 1.0,
+      "semi": 1.06,
+      "furnished": 1.15
+    },
+    "rent_per_sqft_start": 22.0,
+    "rent_annual_growth": 0.06,
+    "floor_premium_per_floor": 0.004,
+    "fill_prob": 0.4,
+    "first_term_months": [
+      [
+        11,
+        12,
+        24
+      ],
+      [
+        0.8,
+        0.12,
+        0.08
+      ]
+    ],
+    "renewal_term_months": [
+      [
+        11,
+        12
+      ],
+      [
+        0.9,
+        0.1
+      ]
+    ],
+    "deposit_multiple": [
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        0.2,
+        0.5,
+        0.3
+      ]
+    ],
+    "notice_days": [
+      [
+        30,
+        60,
+        90
+      ],
+      [
+        0.5,
+        0.35,
+        0.15
+      ]
+    ],
+    "lock_in_months": [
+      [
+        0,
+        3,
+        6,
+        11
+      ],
+      [
+        0.2,
+        0.15,
+        0.45,
+        0.2
+      ]
+    ],
+    "rent_due_day": 5,
+    "tenant_types": [
+      [
+        "family",
+        "bachelor",
+        "student",
+        "company"
+      ],
+      [
+        0.45,
+        0.25,
+        0.12,
+        0.18
+      ]
+    ],
+    "reliability_beta": {
+      "family": [
+        5,
+        2
+      ],
+      "bachelor": [
+        4,
+        2
+      ],
+      "student": [
+        3.5,
+        2
+      ],
+      "company": [
+        6,
+        2
+      ]
+    },
+    "payment": {
+      "late_coef": 0.9,
+      "streak_bump": 0.12,
+      "late_scale_base": 2.0,
+      "late_scale_slope": 12.0,
+      "miss_coef": 0.06,
+      "miss_rel_cutoff": 0.6,
+      "partial_prob": 0.03,
+      "modes": [
+        [
+          "upi",
+          "bank_transfer",
+          "cheque",
+          "cash"
+        ],
+        [
+          0.6,
+          0.3,
+          0.07,
+          0.03
+        ]
+      ]
+    },
+    "early_exit": {
+      "base": 0.004,
+      "sat_coef": 0.012
+    },
+    "renewal": {
+      "intercept": 0.9,
+      "sat": 0.8,
+      "hike": 12.0,
+      "late": 1.5,
+      "overpriced": 3.0,
+      "base_hike": 0.05
+    },
+    "late_entry_prob": 0.2,
+    "late_entry_max_days": 10
+  },
+  "stats": {
+    "rows": {
+      "person": 1992,
+      "owner": 390,
+      "tenant": 1602,
+      "flat": 500,
+      "lease": 3285,
+      "lease_event": 5823,
+      "rent_payment": 35632
+    },
+    "flats_rentable": 363,
+    "lease_outcomes": {
+      "renewed": 1683,
+      "moved_out": 1098,
+      "early_exit": 171,
+      "active": 333
+    },
+    "renewal_rate_at_natural_end": 0.605,
+    "payments_paid_late_pct": 29.2,
+    "payments_unpaid_pct": 0.22,
+    "avg_days_late_when_late": 7.0,
+    "avg_monthly_rent": 36760.0,
+    "avg_deposit_multiple": 1.96
+  }
+}
