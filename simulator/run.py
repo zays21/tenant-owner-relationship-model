@@ -41,6 +41,10 @@ def write_snapshot(sim, cfg, stats, out_root):
         w = csv.writer(f)
         w.writerow(["entity", "entity_id", "trait", "value"])
         w.writerows(sim.hidden)                  # ground truth for validation ONLY, never a model feature
+    with open(os.path.join(folder, "anomaly_labels.csv"), "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["entity", "entity_id", "type", "detail"])
+        w.writerows(sim.anomalies)               # ground truth for anomaly / data-quality tests ONLY
     with open(os.path.join(folder, "data_card.json"), "w", encoding="utf-8") as f:
         json.dump({"config": cfg, "stats": stats}, f, indent=2, default=str)
     return folder

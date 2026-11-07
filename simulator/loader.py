@@ -7,9 +7,15 @@ from psycopg2.extras import execute_values
 
 from generator import COLUMNS
 
-LOAD_ORDER = ["person", "owner", "tenant", "flat", "lease", "lease_event", "rent_payment"]
+LOAD_ORDER = ["person", "owner", "tenant", "flat", "staff", "lease", "lease_event", "family_member",
+              "emergency_contact", "kyc_document", "police_verification", "rent_payment", "deposit_ledger",
+              "charge", "expense", "complaint", "complaint_update", "complaint_assignment", "audit_log"]
 SERIAL_KEYS = {"person": "person_id", "owner": "owner_id", "tenant": "tenant_id", "flat": "flat_id",
-               "lease": "lease_id", "lease_event": "event_id", "rent_payment": "payment_id"}
+               "staff": "staff_id", "lease": "lease_id", "lease_event": "event_id", "family_member": "member_id",
+               "emergency_contact": "contact_id", "kyc_document": "doc_id", "police_verification": "pv_id",
+               "rent_payment": "payment_id", "deposit_ledger": "entry_id", "charge": "charge_id",
+               "expense": "expense_id", "complaint": "complaint_id", "complaint_update": "update_id",
+               "complaint_assignment": "assignment_id", "audit_log": "log_id"}
 
 
 def connect():
@@ -23,12 +29,18 @@ def connect():
 def load(conn, tables, reset=False):
     with conn:                                   # one transaction: all or nothing
         cur = conn.cursor()
-        cur.execute("SELECT table_name FROM information_schema.tables "
-                    "WHERE table_schema = 'public' AND table_type = 'BASE TABLE'")
-        all_tables = [r[0] for r in cur.fetchall()]
-        missing = [t for t in LOAD_ORDER if t not in all_tables]
+        cur.execute("SELECT tablename, tableowner FROM pg_tables WHERE schemaname = 'public'")
+        found = dict(cur.fetchall())
+        all_tables = list(found)
+        me = conn.get_dsn_parameters()["user"]
+        missing = [t for t in LOAD_ORDER if t not in found]
         if missing:
-            raise SystemExit(f"Missing tables {missing}. Run schema/001_entities.sql first.")
+            raise SystemExit(f"Missing tables {missing}. Run schema/001_entities.sql and 004_finance_complaints.sql as ert_user first.")
+        wrong_owner = sorted({o for t, o in found.items() if o != me})
+        if wrong_owner:
+            raise SystemExit(f"The tables are owned by {wrong_owner}, not by {me}. They were probably created while "
+                             f"logged in as that user. Drop the public schema and re-create the tables as {me} "
+                             f"(see the fix in the chat), then run this again.")
         if reset:
             cur.execute("TRUNCATE " + ", ".join(all_tables) + " RESTART IDENTITY CASCADE")
         else:
@@ -68,4 +80,13 @@ def verify(conn):
     out["move_in_before_lease_start"] = cur.fetchone()[0]
     cur.execute("SELECT count(*) FROM lease WHERE valid_to <= valid_from")
     out["bad_date_ranges"] = cur.fetchone()[0]
+    # deposit ledger: for every tenancy whose deposit was returned, received = deducted + returned
+    cur.execute("SELECT count(*) FROM (SELECT lease_id, sum(CASE WHEN entry_type = 'received' THEN amount ELSE -amount END) AS bal, "
+                "bool_or(entry_type = 'returned') AS has_return FROM deposit_ledger GROUP BY lease_id) s "
+                "WHERE has_return AND abs(bal) > 0.01")
+    out["deposit_ledgers_that_do_not_balance"] = cur.fetchone()[0]
+    cur.execute("SELECT count(*) FROM complaint WHERE resolved_at < created_at")
+    out["complaints_resolved_before_created"] = cur.fetchone()[0]
+    cur.execute("SELECT count(*) FROM audit_log")
+    out["audit_log_rows"] = cur.fetchone()[0]
     return out
