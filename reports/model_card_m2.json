@@ -1,0 +1,132 @@
+{
+  "task": "Late rent (more than 7 days)",
+  "label": "y_late_over_7d",
+  "primary_model": "boosting",
+  "tuning": {
+    "logistic": {
+      "hyperparameters": {
+        "C": 0.1
+      },
+      "validation_ap": 0.1944
+    },
+    "forest": {
+      "hyperparameters": {
+        "leaf": 50
+      },
+      "validation_ap": 0.1974
+    },
+    "boosting": {
+      "hyperparameters": {
+        "depth": 2,
+        "lr": 0.03,
+        "iters": 150,
+        "l2": 5.0
+      },
+      "validation_ap": 0.1986
+    }
+  },
+  "trained_on": "train+valid chronological periods",
+  "evaluated_on": "test period, scored once",
+  "data": {
+    "rows": 34341,
+    "train": 20427,
+    "valid": 6967,
+    "test": 6947,
+    "positive_rate": 0.0969,
+    "split_cutoffs": [
+      "2023-04-01",
+      "2025-01-01"
+    ]
+  },
+  "test_metrics": {
+    "logistic": {
+      "roc_auc": 0.6910633621970889,
+      "pr_auc": 0.20984600379429788,
+      "brier": 0.08060858521163174,
+      "log_loss": 0.289976392211678,
+      "precision_top10": 0.260431654676259,
+      "recall_top10": 0.2776073619631902,
+      "lift_top10": 2.774875314472349,
+      "roc_auc_ci": [
+        0.6633923153959471,
+        0.7157480704864622
+      ],
+      "pr_auc_ci": [
+        0.17993800216522884,
+        0.24270725227854753
+      ]
+    },
+    "forest": {
+      "roc_auc": 0.7064509762836412,
+      "pr_auc": 0.2116285704003028,
+      "brier": 0.08056067563057519,
+      "log_loss": 0.28833268612767643,
+      "precision_top10": 0.25323741007194245,
+      "recall_top10": 0.26993865030674846,
+      "lift_top10": 2.698221300260405,
+      "roc_auc_ci": [
+        0.6810039371882701,
+        0.7297321492848038
+      ],
+      "pr_auc_ci": [
+        0.1815465372097767,
+        0.24438337550852324
+      ]
+    },
+    "boosting": {
+      "roc_auc": 0.7071464596013001,
+      "pr_auc": 0.21093766257782792,
+      "brier": 0.08037809798043156,
+      "log_loss": 0.28780023008669164,
+      "precision_top10": 0.25323741007194245,
+      "recall_top10": 0.26993865030674846,
+      "lift_top10": 2.698221300260405,
+      "roc_auc_ci": [
+        0.6798781352125888,
+        0.7293922410409431
+      ],
+      "pr_auc_ci": [
+        0.18207627496841308,
+        0.24306981046765977
+      ]
+    },
+    "prevalence": {
+      "roc_auc": 0.5,
+      "pr_auc": 0.09768562458932613,
+      "brier": 0.08505967508119208,
+      "log_loss": 0.31144811004631207
+    },
+    "best_single_feature (mean_late_days)": {
+      "roc_auc": 0.6849054902858925,
+      "pr_auc": 0.19563666038607352,
+      "brier": NaN,
+      "log_loss": NaN,
+      "precision_top10": 0.24028776978417266,
+      "recall_top10": 0.2561349693251534,
+      "lift_top10": 2.560244074678907,
+      "roc_auc_ci": [
+        0.657994420347523,
+        0.7102736048133252
+      ],
+      "pr_auc_ci": [
+        0.1661782472359713,
+        0.22929238009956845
+      ]
+    }
+  },
+  "calibration_ece": 0.01,
+  "paired_gain_vs_best_single_feature": {
+    "roc_auc_gain_vs_best_single_feature": [
+      0.02221503999417375,
+      0.013421339110840235,
+      0.0312827409131471
+    ],
+    "pr_auc_gain_vs_best_single_feature": [
+      0.015761796044926283,
+      0.003658682944654072,
+      0.027391137300154696
+    ]
+  },
+  "intended_use": "learning and research on synthetic data; not for decisions about real people",
+  "known_limits": "trained on simulated behaviour; results describe the simulator, not real tenants"
+}

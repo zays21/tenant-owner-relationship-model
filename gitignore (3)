@@ -1,0 +1,7 @@
+data/snapshots/
+data/features/
+data/features_seed*/
+models/saved/
+__pycache__/
+*.pyc
+.env

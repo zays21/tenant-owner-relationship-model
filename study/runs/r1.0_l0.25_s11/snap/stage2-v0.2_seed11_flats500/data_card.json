@@ -1,0 +1,649 @@
+{
+  "config": {
+    "seed": 11,
+    "version": "stage2-v0.2",
+    "sim_start": "2018-01-01",
+    "sim_end": "2026-10-31",
+    "n_flats": 500,
+    "floors": 10,
+    "units_per_floor": 10,
+    "owner_ratio": 0.78,
+    "owner_types": [
+      [
+        "resident",
+        "absentee",
+        "company"
+      ],
+      [
+        0.35,
+        0.5,
+        0.15
+      ]
+    ],
+    "rentable_prob": {
+      "resident": 0.25,
+      "absentee": 0.92,
+      "company": 1.0
+    },
+    "owner_hike_mean": [
+      0.06,
+      0.025
+    ],
+    "bhk": [
+      [
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0.15,
+        0.4,
+        0.35,
+        0.1
+      ]
+    ],
+    "area_by_bhk": {
+      "1": 650,
+      "2": 1050,
+      "3": 1450,
+      "4": 2000
+    },
+    "furnishing": [
+      [
+        "unfurnished",
+        "semi",
+        "furnished"
+      ],
+      [
+        0.4,
+        0.4,
+        0.2
+      ]
+    ],
+    "furnishing_premium": {
+      "unfurnished": 1.0,
+      "semi": 1.06,
+      "furnished": 1.15
+    },
+    "rent_per_sqft_start": 22.0,
+    "rent_annual_growth": 0.06,
+    "floor_premium_per_floor": 0.004,
+    "fill_prob": 0.4,
+    "first_term_months": [
+      [
+        11,
+        12,
+        24
+      ],
+      [
+        0.8,
+        0.12,
+        0.08
+      ]
+    ],
+    "renewal_term_months": [
+      [
+        11,
+        12
+      ],
+      [
+        0.9,
+        0.1
+      ]
+    ],
+    "deposit_multiple": [
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        0.2,
+        0.5,
+        0.3
+      ]
+    ],
+    "notice_days": [
+      [
+        30,
+        60,
+        90
+      ],
+      [
+        0.5,
+        0.35,
+        0.15
+      ]
+    ],
+    "lock_in_months": [
+      [
+        0,
+        3,
+        6,
+        11
+      ],
+      [
+        0.2,
+        0.15,
+        0.45,
+        0.2
+      ]
+    ],
+    "rent_due_day": 5,
+    "tenant_types": [
+      [
+        "family",
+        "bachelor",
+        "student",
+        "company"
+      ],
+      [
+        0.45,
+        0.25,
+        0.12,
+        0.18
+      ]
+    ],
+    "reliability_beta": {
+      "family": [
+        5,
+        2
+      ],
+      "bachelor": [
+        4,
+        2
+      ],
+      "student": [
+        3.5,
+        2
+      ],
+      "company": [
+        6,
+        2
+      ]
+    },
+    "payment": {
+      "late_coef": 0.225,
+      "streak_bump": 0.12,
+      "late_scale_base": 2.0,
+      "late_scale_slope": 12.0,
+      "miss_coef": 0.06,
+      "miss_rel_cutoff": 0.6,
+      "partial_prob": 0.03,
+      "modes": [
+        [
+          "upi",
+          "bank_transfer",
+          "cheque",
+          "cash"
+        ],
+        [
+          0.6,
+          0.3,
+          0.07,
+          0.03
+        ]
+      ]
+    },
+    "early_exit": {
+      "base": 0.004,
+      "sat_coef": 0.012
+    },
+    "renewal": {
+      "intercept": 0.9,
+      "sat": 0.8,
+      "hike": 12.0,
+      "late": 1.5,
+      "overpriced": 3.0,
+      "base_hike": 0.05
+    },
+    "late_entry_prob": 0.2,
+    "late_entry_max_days": 10,
+    "complaints": {
+      "rate_per_lease_month": 0.18,
+      "monsoon_months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "monsoon_plumbing_boost": 2.0,
+      "categories": [
+        [
+          "plumbing",
+          "electrical",
+          "noise",
+          "parking",
+          "lift",
+          "security",
+          "cleanliness",
+          "other"
+        ],
+        [
+          0.24,
+          0.17,
+          0.14,
+          0.1,
+          0.09,
+          0.06,
+          0.12,
+          0.08
+        ]
+      ],
+      "priority": {
+        "plumbing": [
+          0.1,
+          0.4,
+          0.35,
+          0.15
+        ],
+        "electrical": [
+          0.1,
+          0.35,
+          0.35,
+          0.2
+        ],
+        "noise": [
+          0.5,
+          0.4,
+          0.09,
+          0.01
+        ],
+        "parking": [
+          0.5,
+          0.4,
+          0.1,
+          0.0
+        ],
+        "lift": [
+          0.1,
+          0.3,
+          0.4,
+          0.2
+        ],
+        "security": [
+          0.15,
+          0.35,
+          0.35,
+          0.15
+        ],
+        "cleanliness": [
+          0.5,
+          0.4,
+          0.09,
+          0.01
+        ],
+        "other": [
+          0.5,
+          0.4,
+          0.09,
+          0.01
+        ]
+      },
+      "responsibility": {
+        "plumbing": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.55,
+            0.25,
+            0.12,
+            0.08
+          ]
+        ],
+        "electrical": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.5,
+            0.3,
+            0.12,
+            0.08
+          ]
+        ],
+        "noise": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.05,
+            0.6,
+            0.05,
+            0.3
+          ]
+        ],
+        "parking": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.02,
+            0.7,
+            0.03,
+            0.25
+          ]
+        ],
+        "lift": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.0,
+            0.95,
+            0.0,
+            0.05
+          ]
+        ],
+        "security": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.0,
+            0.95,
+            0.0,
+            0.05
+          ]
+        ],
+        "cleanliness": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.0,
+            0.9,
+            0.05,
+            0.05
+          ]
+        ],
+        "other": [
+          [
+            "owner",
+            "society",
+            "tenant",
+            "unknown"
+          ],
+          [
+            0.15,
+            0.6,
+            0.1,
+            0.15
+          ]
+        ]
+      },
+      "mean_days": {
+        "low": 6.0,
+        "medium": 3.0,
+        "high": 1.5,
+        "urgent": 0.6
+      },
+      "owner_slowness": 4.0,
+      "society_multiplier": 1.2,
+      "reject_prob": 0.03,
+      "close_prob": 0.4,
+      "hinglish_prob": 0.1,
+      "typo_prob": 0.08,
+      "sat_hit": {
+        "base": 0.1,
+        "per_day": 0.03,
+        "cap": 0.9,
+        "fast_bonus": 0.08,
+        "fast_days": 2.0,
+        "unresolved": 0.5,
+        "rejected": 0.05
+      },
+      "repair_cost_prob": 0.6,
+      "repair_cost_logmean": {
+        "plumbing": 7.3,
+        "electrical": 7.2,
+        "lift": 9.0,
+        "security": 7.0,
+        "cleanliness": 6.5,
+        "other": 7.0
+      },
+      "violation_prob": 0.08
+    },
+    "staff": {
+      "plumber": 2,
+      "electrician": 2,
+      "guard": 4,
+      "housekeeping": 3,
+      "manager": 1,
+      "vendor": 2
+    },
+    "salary": {
+      "guard": 16000,
+      "housekeeping": 12000,
+      "manager": 35000
+    },
+    "salary_growth": 0.05,
+    "charges": {
+      "maintenance_per_sqft": 2.6,
+      "maintenance_growth": 0.04,
+      "maintenance_due_day": 10,
+      "tenant_pays_maintenance_prob": 0.45,
+      "owner_reliability_beta": [
+        6,
+        2
+      ],
+      "late_coef": 0.55,
+      "late_scale_base": 2.0,
+      "late_scale_slope": 8.0,
+      "p_unpaid_low_rel": 0.01,
+      "penalty_after_days": 15,
+      "penalty_pct": 0.05,
+      "penalty_min": 200,
+      "special_events_per_year": [
+        [
+          1,
+          2
+        ],
+        [
+          0.6,
+          0.4
+        ]
+      ],
+      "special_per_sqft": [
+        1.5,
+        4.0
+      ],
+      "special_reasons": [
+        "lift modernisation fund",
+        "building repainting",
+        "water tank replacement",
+        "generator upgrade",
+        "CCTV upgrade"
+      ],
+      "donation_prob": 0.45,
+      "donation_amounts": [
+        [
+          501,
+          1100,
+          2100,
+          5100
+        ],
+        [
+          0.3,
+          0.4,
+          0.25,
+          0.05
+        ]
+      ],
+      "donation_month": 10,
+      "violation_amounts": [
+        [
+          500,
+          1000,
+          2000
+        ],
+        [
+          0.5,
+          0.35,
+          0.15
+        ]
+      ]
+    },
+    "deposit": {
+      "damage_prob": 0.35,
+      "damage_prob_early_exit": 0.5,
+      "damage_pct": [
+        0.05,
+        0.3
+      ],
+      "short_notice_prob": 0.5,
+      "return_delay_base": 10,
+      "return_delay_slow": 30,
+      "damage_reasons": [
+        "wall repainting",
+        "cleaning charges",
+        "fixtures damage",
+        "pest control"
+      ]
+    },
+    "police_verification": {
+      "submit_prob_first": 0.9,
+      "submit_prob_renewal": 0.5,
+      "max_submit_delay_days": 45,
+      "review_mean_days": 15,
+      "reject_prob": 0.02,
+      "validity_days": 365
+    },
+    "kyc": {
+      "id_status": [
+        [
+          "verified",
+          "pending",
+          "rejected",
+          "expired"
+        ],
+        [
+          0.9,
+          0.06,
+          0.02,
+          0.02
+        ]
+      ],
+      "address_proof_prob": 0.7,
+      "employer_letter_prob": 0.6
+    },
+    "noise": {
+      "missing_income": 0.05,
+      "missing_occupation": 0.03,
+      "missing_gender": 0.02,
+      "missing_furnishing": 0.02,
+      "missing_payment_mode": 0.01,
+      "missing_doc_number": 0.05,
+      "duplicate_person_prob": 0.01,
+      "move_in_before_lease_prob": 0.005
+    },
+    "anomalies": {
+      "expense_inflated": 0.015,
+      "expense_duplicate": 0.008,
+      "expense_missing_approval": 0.005,
+      "payment_correction": 0.025,
+      "suspicious_edit": 0.001
+    }
+  },
+  "stats": {
+    "rows": {
+      "person": 2007,
+      "owner": 390,
+      "tenant": 1601,
+      "flat": 500,
+      "staff": 14,
+      "lease": 3230,
+      "lease_event": 6958,
+      "family_member": 2497,
+      "emergency_contact": 2095,
+      "kyc_document": 3784,
+      "police_verification": 3230,
+      "rent_payment": 34450,
+      "deposit_ledger": 3897,
+      "charge": 61084,
+      "expense": 2480,
+      "complaint": 6172,
+      "complaint_update": 26640,
+      "complaint_assignment": 6441,
+      "audit_log": 943
+    },
+    "flats_rentable": 352,
+    "lease_outcomes": {
+      "renewed": 1629,
+      "moved_out": 1038,
+      "early_exit": 231,
+      "active": 332
+    },
+    "renewal_rate_at_natural_end": 0.611,
+    "payments_paid_late_pct": 7.4,
+    "payments_unpaid_pct": 0.21,
+    "avg_days_late_when_late": 7.4,
+    "avg_monthly_rent": 37721.0,
+    "avg_deposit_multiple": 2.0,
+    "complaints_by_status": {
+      "closed": 2341,
+      "in_progress": 4,
+      "open": 1,
+      "rejected": 191,
+      "resolved": 3635
+    },
+    "complaints_by_priority": {
+      "high": 1535,
+      "low": 1615,
+      "medium": 2374,
+      "urgent": 648
+    },
+    "complaint_mean_days_to_resolve": 4.67,
+    "complaint_median_days_to_resolve": 2.54,
+    "police_verification_status": {
+      "completed": 2100,
+      "expired": 92,
+      "not_submitted": 977,
+      "rejected": 48,
+      "submitted": 13
+    },
+    "charges_by_type": {
+      "donation": 2053,
+      "maintenance": 53000,
+      "penalty": 531,
+      "special": 5500
+    },
+    "maintenance_paid_late_pct": 14.3,
+    "deposit_entries": {
+      "deducted": 1106,
+      "received": 1601,
+      "returned": 1190
+    },
+    "anomaly_labels": {
+      "move_in_before_lease_start": 6,
+      "missing_approval": 5,
+      "inflated_amount": 40,
+      "duplicate_entry": 20,
+      "suspicious_edit": 40,
+      "duplicate_of": 16
+    }
+  }
+}
