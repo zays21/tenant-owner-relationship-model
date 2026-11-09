@@ -5,7 +5,7 @@ from datetime import date
 
 CONFIG = {
     "seed": 42,                       # same seed + same config => identical dataset
-    "version": "stage2-v0.2",
+    "version": "stage3-v0.3",
     "sim_start": date(2018, 1, 1),
     "sim_end": date(2026, 10, 31),    # "today" inside the simulation
 
@@ -27,8 +27,8 @@ CONFIG = {
     "furnishing_premium": {"unfurnished": 1.00, "semi": 1.06, "furnished": 1.15},
 
     # ---- market rent: replace with numbers calibrated from a real rent dataset
-    "rent_per_sqft_start": 22.0,      # Rs per sq ft per month in sim_start year
-    "rent_annual_growth": 0.06,
+    "rent_per_sqft_start": 16.0,      # Rs per sq ft per month in 2018; anchored so 2026 is about Rs 25 (Square Yards, Jaipur)
+    "rent_annual_growth": 0.05,
     "floor_premium_per_floor": 0.004,
 
     # ---- vacancy and lease terms
